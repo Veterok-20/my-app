@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import NewPatient from './components/NewPatient';
+import ListPatients from './components/ListPatients';
+import { useState } from "react"
+import Patient from "./components/Patient"
 
-function App() {
+
+
+export default function App() {
+  const [inputPatients, setinputPatients] = useState([])
+// useEffect(() => {
+//   fetch('/api/inputPatients').then(response => {
+//     return response.json()}).then(patientsFromServer => {
+//       setinputPatients(patientsFromServer).catch(console.error)
+//     })
+// }, [])
+
+
+  const ptnDelete = (id) => {
+    console.log(id)
+    let newinputPatient = [...inputPatients]
+    newinputPatient.splice(id, 1)
+    setinputPatients(newinputPatient)
+    
+  }
+
+  const addNewPatient = (newPatient) => {
+    setinputPatients([...inputPatients, newPatient])
+  }
+
+  const PatientEmbeded = (ptn) => {
+    return <Patient
+      key={ptn.id}     
+      ptnDelete={ptnDelete}
+      {...ptn} />
+  }
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={
+      { maxWidth: 800, minWidth: 300, margin: "0 auto" }
+    }>
+      <NewPatient addNewPatient={addNewPatient} />
+      <ListPatients inputPatients={inputPatients}>
+        {PatientEmbeded}
+      </ListPatients>
     </div>
-  );
+  )
 }
 
-export default App;
+
+
+
+
+
