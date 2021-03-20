@@ -14,7 +14,7 @@ export default function App() {
 //       setinputPatients(patientsFromServer).catch(console.error)
 //     })
 // }, [])
-
+ 
 
   const ptnDelete = (id) => {
     console.log(id)
