@@ -28,7 +28,7 @@ console.log(newPatient);
                      body: JSON.stringify(newPatient)              
               }).then(response => response.json())
                 .then(response => { console.log(response)
-                                    props.addNewPatient(response)
+                                    props.addNewPatient(newPatient)
                                     setinputLastName('')
                                     setinputName('')
                                     setinputPatronymic('')
